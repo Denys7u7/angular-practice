@@ -1,0 +1,125 @@
+<div class="row">
+  <form class="col-6 mx-auto mt-5" ngForm #form="ngForm">
+    <div class="radio">
+      <label
+        ><input ngModel type="radio" name="contactMethod" value="1" />
+        Email
+      </label>
+    </div>
+    <div class="radio">
+      <label
+        ><input ngModel type="radio" name="contactMethod" value="2" />
+        Phone
+      </label>
+    </div>
+    <!-- <div class="form-group">
+      <label for="contactMethod">Contact Method</label
+      ><select
+        multiple
+        ngModel
+        name="contactMethod"
+        id="contactMethod"
+        class="form-control"
+      >
+        <option *ngFor="let mc of contactMethods" [value]="mc.id">
+          {{ mc.name }}
+        </option>
+      </select>
+    </div> -->
+    <div ngModelGroup="names" #names="ngModelGroup">
+      <div *ngIf="!names.valid && names.touched">Names are invalid</div>
+      <div class="form-group mb-4">
+        <label for="firtsName">First Name</label>
+        <input
+          required
+          ngModel
+          name="firtsName"
+          #firtsName="ngModel"
+          (blur)="log(firtsName)"
+          id="firtsName"
+          type="text"
+          class="form-control"
+          [style.border]="
+            firtsName.valid || !firtsName.touched ? '' : '1px solid red'
+          "
+        />
+        <!-- [ngStyle]="{
+            border: firtsName.valid || !firtsName.touched ? '' : '1px solid red'
+          }"
+        /> -->
+      </div>
+      <div class="form-group mb-4">
+        <label for="secondName">Second Name</label>
+        <input
+          required
+          ngModel
+          name="secondName"
+          #secondName="ngModel"
+          (blur)="log(secondName)"
+          id="secondName"
+          type="text"
+          class="form-control"
+          [style.border]="
+            secondName.valid || !secondName.touched ? '' : '1px solid red'
+          "
+        />
+        <!-- [ngStyle]="{
+            border: firtsName.valid || !firtsName.touched ? '' : '1px solid red'
+          }"
+        /> -->
+      </div>
+    </div>
+    <div class="form-group mb-4">
+      <label for="email">Email</label>
+      <input
+        required
+        ngModel
+        name="email"
+        #email="ngModel"
+        (blur)="log(email)"
+        id="email"
+        type="text"
+        class="form-control"
+        [pattern]="emailRegex"
+        [style.border]="email.valid || !email.touched ? '' : '1px solid red'"
+      />
+      <!-- [ngStyle]="{
+            border: email.valid || !email.touched ? '' : '1px solid red'
+          }"
+        /> -->
+    </div>
+    <div class="form-group mb-4">
+      <label for="comment">Comment</label>
+      <textarea
+        required
+        ngModel
+        name="comment"
+        #comment="ngModel"
+        name="comment"
+        id="comment"
+        class="form-control"
+        cols="30"
+        rows="10"
+      ></textarea>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ngModel name="isSubscribed" /> You wanna
+        subscribe
+      </label>
+    </div>
+    <div class="text-center">
+      <!-- form.onReser para resetear el formulario -->
+      <!-- <button class="btn btn-primary" (click)="form.onReset()">Submit</button> -->
+      <button
+        class="btn btn-primary"
+        (click)="submit(form)"
+        [disabled]="form.invalid"
+      >
+        Submit
+      </button>
+    </div>
+
+    <div>{{ form.value | json }}</div>
+  </form>
+</div>

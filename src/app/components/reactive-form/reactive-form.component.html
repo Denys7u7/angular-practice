@@ -1,0 +1,64 @@
+<div class="row">
+  <form class="col-6 mx-auto mt-5" [formGroup]="form" (ngSubmit)="login()">
+    <div class="alert alert-danger" *ngIf="form.errors">
+      The username or password is invalid
+    </div>
+    <div formGroupName="account">
+      <div class="form-group mb-3">
+        <label for="username">Username</label
+        ><input
+          type="text"
+          name="username"
+          id="username"
+          class="form-control"
+          formControlName="username"
+        />
+      </div>
+      <div *ngIf="username.pending">Checking for uniques....</div>
+      <div
+        *ngIf="username.invalid && username.touched"
+        class="alert alert-danger"
+      >
+        <div *ngIf="username.errors!['required']">Username is required</div>
+        <div *ngIf="username.errors!['minlength']">
+          Username should be minimun 3 character
+        </div>
+        <div *ngIf="username.errors!['shouldBeUnique']">
+          This field should be unique
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="password">Password</label
+        ><input
+          type="text"
+          name="password"
+          id="password"
+          class="form-control"
+          formControlName="password"
+        />
+      </div>
+
+      <div
+        *ngIf="password().invalid && password().touched"
+        class="alert alert-danger"
+      >
+        <div *ngIf="password().hasError('required')">Password is required</div>
+        <div *ngIf="password().hasError('minlength')">
+          Password should be minimun 3 character
+        </div>
+        <div *ngIf="password().errors!['cannotContainSpace']">
+          Cannot contain spaces
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-secondary">
+      {{ form.status }}
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="log(form)">
+      Sign up
+    </button>
+  </form>
+</div>

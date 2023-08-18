@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-10 mx-auto p-3">
+    <div class="form-group">
+      <input
+        #title
+        (keyup.enter)="createPost(title)"
+        type="text"
+        class="form-control my-4"
+        placeholder="Nuevo item"
+      />
+    </div>
+
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let post of posts; let i = index">
+        {{ i + 1 }} - {{ post.title }}
+      </li>
+    </ul>
+  </div>
+</div>

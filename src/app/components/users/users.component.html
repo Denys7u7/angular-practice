@@ -1,0 +1,35 @@
+<div class="container text-center p-3">
+  <form [formGroup]="form" class="row mb-3">
+    <mat-form-field class="col-12">
+      <mat-select
+        formControlName="users"
+        placeholder="Users"
+        (selectionChange)="selectGender()"
+      >
+        <mat-option *ngFor="let u of users" [value]="u">
+          {{ u["name"] }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="col-12">
+      <mat-select formControlName="gender" placeholder="Gender">
+        <mat-option *ngFor="let u of users" [value]="u['gender']">
+          {{ u["gender"] }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      class="col-12"
+      (click)="submit()"
+      [disabled]="form.invalid"
+    >
+      Select
+    </button>
+  </form>
+  {{ userSelected | json }}
+</div>
+
+{{ pikachu$ | async | json }}
